@@ -2,6 +2,8 @@
 
 Plugin that adds support to run NestJS Apps from Nest Monorepo, which is set up using Nest CLI with several microservices.
 
+**This plugin allows you to use Serverless framework with each microservice from monorepo. Each microservice gets separate configuration for Serverless framework.**
+
 Nest monorepo looks like this:
 
 - apps/
@@ -18,11 +20,13 @@ Nest monorepo looks like this:
     - service2
     - service3
 
-It is build using `nest build <service>` command and generates webpacked JavaScript file from TypeScript in `dist/apps/service` directories. Node modules are in root directory as are `nest-cli.json` or other configuration files.
+It is build using `nest build <service>` command and generates webpacked JavaScript file from TypeScript in `dist/apps/service1` directory. Node modules are in root directory as are `nest-cli.json` or other configuration files.
 
-This structure is fairly incompatible with Serverless framework `serverless`.
+This structure is fairly incompatible with Serverless framework `serverless`, since it does not work very good with multiple services.
 
-# Installation
+
+
+## Installation
 
 Install with npm in monorepo:
 
@@ -47,7 +51,7 @@ plugins:
   - serverless-nest-monorepo
 ```
 
-# Usage
+## Usage
 
 Once root `serverless.yml` is set up, run serverless.
 
@@ -66,6 +70,7 @@ frameworkVersion: '3'
 ```
 
 
-# Caveats
+### Caveats
 
 - If you are using `useDotenv: true`, ensure you set it to true in root `serverless.yml` and a symlink will be created for correct NestJS app.
+- It was only tested using Serverless Framework **version 3**.
