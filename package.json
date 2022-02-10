@@ -1,0 +1,23 @@
+{
+  "name": "serverless-nest-monorepo",
+  "version": "1.0.0",
+  "repository": "github:blubblub/serverless-nest-monorepo",
+  "description": "Serverless plugin to support NestJS monorepo",
+  "keywords": [
+    "serverless",
+    "monorepo",
+    "nest",
+    "nestjs"
+  ],
+  "author": "Dal Rupnik",
+  "homepage": "https://github.com/blubblub/serverless-nest-monorepo",
+  "bugs": "https://github.com/blubblub/serverless-nest-monorepo/issues",
+  "license": "MIT",
+  "main": "index.js",
+  "peerDependencies": {
+    "serverless": "2 || 3"
+  },
+  "engines": {
+    "node": ">=14"
+  }
+}
