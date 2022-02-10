@@ -54,15 +54,19 @@ frameworkVersion: '3'
 plugins:
   - serverless-nest-monorepo
 ```
-Both `provider` and `service` settings are ignored, but are there for main serverless config validation.
+*Both `provider` and `service` settings are ignored, but are there for main Serverless framework config validation, since plugins are loaded after configuration.*
 
 ## Usage
 
-Once root `serverless.yml` is set up and each microservice you wish to run has `serverless.yml` in it's app directory, run `serverless mono` from the root.
+Once root `serverless.yml` is set up and each microservice you wish to run has `serverless.yml` in it's app directory, run `serverless mono` from the root. Command has two required parameters:
 
+- `nestApp` Nest app to run
+
+Example 1: Run `serverless offline` for microservice `service1`
 ```
-serverless mono --nestApp service1
+serverless mono --nestApp service1 --command offline
 ```
+
 
 
 ### Caveats
@@ -70,8 +74,19 @@ serverless mono --nestApp service1
 - If you are using `useDotenv: true`, ensure you set it to true in root `serverless.yml` and a symlink will be created for correct NestJS microservice.
 - It was only tested using Serverless Framework **version 3**.
 - Config in root must pass serverless's configuration check, so a provider must be picked. Both name and runtime are ignored in the root file.
+- Ensure you implemented handler correctly in your Nest microservice.
 - It is suggested to add `.tml.yml` to .gitignore, as the plugin creates symbolic links to prevent commiting them to repository.
 
 ### How it works?
 
-Once `serverless mono` command is executed, a temporary symbolic link (`ln -s`) is created to the serverless file for the correct app. The original file remains
+Once `serverless mono` command is executed the flow is following:
+1. NestJS app is build using `nest build <app>` command, generating `dist/apps/<app>/main.js` file.
+2. A temporary symbolic link (`ln -s`) is created in the root to the serverless file at: `apps/<app>/serverless.yml`. The original file remains untouched.
+3. A temporary symbolic link is created in the root to the `.env` file to the env at `apps/<app>/.env` if `useDotenv` is set to true.
+4. Serverless framework is executed in a separate child process using the command passed with `--command` parameter. STDOUT is displayed.
+5. Cleanup is done.
+
+## TODO
+
+- Check if serverless.yml for microservice exists before linking.
+- Catch SIG
