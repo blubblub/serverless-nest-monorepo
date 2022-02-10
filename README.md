@@ -1,6 +1,6 @@
 # Serverless Nest Monorepo Plugin
 
-Plugin that runs NestJS Apps from Nest Monorepo, which is set up using Nest CLI.
+Plugin that adds support to run NestJS Apps from Nest Monorepo, which is set up using Nest CLI with several microservices.
 
 Nest monorepo looks like this:
 
