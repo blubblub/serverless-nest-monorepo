@@ -18,11 +18,29 @@ Nest monorepo looks like this:
     - service2
     - service3
 
-It is build using `nest build <service>` command and generates webpacked JavaScript file from TypeScript in `dist/apps/service` directories.
-Serverless
+It is build using `nest build <service>` command and generates webpacked JavaScript file from TypeScript in `dist/apps/service` directories. Node modules are in root directory as are `nest-cli.json` or other configuration files.
 
+This structure is fairly incompatible with Serverless framework `serverless`.
 
-# Details
+# Installation
+
+# Usage
+
+Setup a serverless.yml in the root of the monorepo.
+
+```
+service: 'titan'
+
+useDotenv: true
+plugins:
+  - serverless-nest-monorepo
+
+provider:
+  name: aws
+  runtime: nodejs14.x
+
+frameworkVersion: '3'
+```
 
 
 
