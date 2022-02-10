@@ -89,4 +89,5 @@ Once `serverless mono` command is executed the flow is following:
 ## TODO
 
 - Check if serverless.yml for microservice exists before linking.
-- Catch SIG
+- Pass STDIN input to enable interactive plugins.
+- Catch SIGABRT from user for to correctly cleanup links.
