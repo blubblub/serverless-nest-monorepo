@@ -30,7 +30,7 @@ This structure is fairly incompatible with Serverless framework `serverless`, si
 
 1. Install with npm in monorepo root:
 
-`npm install --save-dev serverless-import-config-plugin`
+`npm install --save-dev serverless-nest-monorepo`
 
 2. Move existing serverless.yml file from monorepo root to correct NestJS app. Place it in `apps/service1` directory.
 
@@ -54,6 +54,7 @@ frameworkVersion: '3'
 plugins:
   - serverless-nest-monorepo
 ```
+Both `provider` and `service` settings are ignored, but are there for main serverless config validation.
 
 ## Usage
 
