@@ -4,7 +4,7 @@ Plugin that adds support to run NestJS Apps from Nest Monorepo, which is set up 
 
 **This plugin allows you to use Serverless framework with each microservice from monorepo. Each microservice gets separate configuration for Serverless framework.**
 
-Nest monorepo looks like this:
+Nest monorepo usually looks like this:
 
 - apps/
   - service1
@@ -53,24 +53,14 @@ plugins:
 
 ## Usage
 
-Once root `serverless.yml` is set up, run serverless.
+Once root `serverless.yml` is set up, run serverless command in the root.
 
-```
-service: 'titan'
-
-useDotenv: true
-plugins:
-  - serverless-nest-monorepo
-
-provider:
-  name: aws
-  runtime: nodejs14.x
-
-frameworkVersion: '3'
+`
 ```
 
 
 ### Caveats
 
-- If you are using `useDotenv: true`, ensure you set it to true in root `serverless.yml` and a symlink will be created for correct NestJS app.
+- If you are using `useDotenv: true`, ensure you set it to true in root `serverless.yml` and a symlink will be created for correct NestJS microservice.
 - It was only tested using Serverless Framework **version 3**.
+- Config in root must pass serverless's configuration check, so a provider must be picked. Both name and runtime are ignored in the root file.
