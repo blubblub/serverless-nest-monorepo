@@ -53,6 +53,12 @@ class ServerlessMonorepo {
             required: false,
             type: 'boolean', // Possible values: 'boolean'
           },
+          extra: {
+            usage: 'Serverless options',
+            shortcut: '',
+            required: false,
+            type: 'string', // Possible values: 'string', 'boolean', 'multiple'
+          },
         },
       }
     }
@@ -113,7 +119,7 @@ class ServerlessMonorepo {
   }
 
   async runServerless(options) {
-    const command = `serverless ${options.command} --config serverless-${options.nestApp}.tmp.yml`;
+    const command = `serverless ${options.command} --config serverless-${options.nestApp}.tmp.yml ${options.extra? options.extra : ''}`;
 
     this.log(`Running: ${command}`);
     await passthru(command);
