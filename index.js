@@ -47,6 +47,12 @@ class ServerlessMonorepo {
             required: true,
             type: 'string', // Possible values: 'string', 'boolean', 'multiple'
           },
+          dev: {
+            usage: 'Run nestjs in watch mode',
+            shortcut: '',
+            required: false,
+            type: 'boolean', // Possible values: 'boolean'
+          },
           extra: {
             usage: 'Serverless options',
             shortcut: '',
@@ -93,8 +99,13 @@ class ServerlessMonorepo {
 
   async buildNest(options) {
     this.log(`Building Nest app: ${options.nestApp}...`);
-    await exec(`nest build ${options.nestApp}`);
-    this.log(`Nest app ${options.nestApp} build finished.`);
+    if (options.dev) {
+      await exec(`nest start ${options.nestApp} --watch`);
+      this.log(`Nest app ${options.nestApp} build finished in watch mode.`);
+    } else {
+      await exec(`nest build ${options.nestApp}`);
+      this.log(`Nest app ${options.nestApp} build finished.`);
+    }
   }
 
   async bootstrapServerless(options) {
