@@ -5,6 +5,7 @@ const { spawn, spawnSync, exec, execSync } = require('child_process');
 async function passthru(exe, args, options = {}) {
   return new Promise((resolve, reject) => {
       const env = Object.create(process?.env || {});
+      console.log("Creating child process...");
       const child = spawn(exe, args, {
         ...options,
         shell: true,
